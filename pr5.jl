@@ -23,14 +23,10 @@ function move_to_corner(r::Robot)
 end
 
 function put_all_markers(r::Robot)
-    putmarker!(r)
-    moves!(r, Ost)
-    putmarker!(r)
-    moves!(r, Nord)
-    putmarker!(r)
-    moves!(r, West)
-    putmarker!(r)
-    moves!(r, Sud)
+    for i in 3:6
+        putmarker!(r)
+        moves!(r, HorizonSide(i % 4))
+    end
 end
 
 function moves!(r::Robot, side::HorizonSide)
