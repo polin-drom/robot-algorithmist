@@ -1,5 +1,4 @@
 function find_average(r::Robot)
-    #global sum = 0
     (sum, count) = count_markers(r)
     if count == 0
         print(0)
