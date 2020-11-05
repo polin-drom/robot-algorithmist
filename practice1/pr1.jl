@@ -1,20 +1,23 @@
 function mark_kross(r)
     for side in (HorizonSide(i) for i = 0:3)
-        putmarkers!(r, side)
-        move_by_markers(r, inverse(side))
+        num = putmarkers!(r, side)
+        moves!(r, inverse(side), num)
     end
     putmarker!(r)
 end
 
 function putmarkers!(r::Robot, side::HorizonSide)
+    num = 0
     while !isborder(r, side)
-        move!(r, side);
+        move!(r, side)
+        num += 1
         putmarker!(r)
     end
+    return num
 end
 
-function move_by_markers(r::Robot, side::HorizonSide)
-    while ismarker(r)
+function moves!(r::Robot, side::HorizonSide, num_steps::Int)
+    for i in 1:num_steps
         move!(r, side)
     end
 end
