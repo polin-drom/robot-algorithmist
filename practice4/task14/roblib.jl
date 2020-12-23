@@ -1,11 +1,5 @@
 #Cодержимое файла roblib.jl
 
-"""
-    movements!(r::Robot, side::HorizonSide, num_steps::Int)
-
--- Перемещает Робота в заданном направлении на заданное число шагов    
-"""
-
 function move_back!(r::Robot, side::HorizonSide, num_steps::Int)
     while num_steps > 0
         move_if_possible!(r, side)
@@ -24,6 +18,12 @@ function movements!(r::Robot, side::HorizonSide)
         move!(r, side)
     end 
 end
+
+"""
+    movements!(r::Robot, side::HorizonSide, num_steps::Int)
+
+-- Перемещает Робота в заданном направлении на заданное число шагов    
+"""
 
 function movements!(r::Robot, side::HorizonSide, num_steps::Int)
     for i in 1:num_steps
