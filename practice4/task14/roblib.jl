@@ -7,8 +7,8 @@
 """
 
 function move_back!(r::Robot, side::HorizonSide, num_steps::Int)
-    num_steps -= 1
-    while move_if_possible!(r, side) && num_steps > 0
+    while num_steps > 0
+        move_if_possible!(r, side)
         num_steps -= 1
     end
 end
@@ -94,24 +94,29 @@ function move_if_possible!(r::Robot, now_side::HorizonSide)::Bool
     right_side = inverse(left_side)
     num_steps = 0
 
+    back_steps = 0
+
     while isborder(r, now_side)
-        #print(num_steps)
         if !isborder(r, left_side)
             move!(r, left_side)
             num_steps += 1
+            back_steps += 1
         else
-            movements!(r, right_side, num_steps)
+            movements!(r, right_side, back_steps)
             return false # робот пришел в угол
         end
     end
 
     move!(r, now_side)
 
+    back_steps = 0
+
     while isborder(r, right_side)
         if !isborder(r, now_side)
             move!(r, now_side)
+            back_steps += 1
         else
-            movements!(r, left_side, num_steps)
+            movements!(r, left_side, back_steps)
             return false # робот пришел в угол
         end
     end
