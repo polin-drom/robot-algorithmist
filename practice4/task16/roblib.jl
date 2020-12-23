@@ -25,13 +25,6 @@ function movements!(r::Robot, side::HorizonSide)
     end 
 end
 
-function putmarkers!(r::Robot, side::HorizonSide)
-    while !isborder(r, side)
-        move!(r, side)
-        putmarker!(r)
-    end
-end
-
 function movements!(r::Robot, side::HorizonSide, num_steps::Int)
     for i in 1:num_steps
         move!(r, side)
